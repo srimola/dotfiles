@@ -1,0 +1,21 @@
+# AMP Aliases
+alias a="amp"
+alias as="amp sync"
+alias aw="amp watch"
+alias acon="amp connect"
+alias asc="amp sandbox-create"
+
+# Vaprobash
+alias vaprobash="curl -L http://bit.ly/vaprobash > Vagrantfile"
+
+# Selenium
+alias selenium="java -jar ~/Code/selenium-server-standalone.jar"
+
+# Colordiff
+alias diff=colordiff
+
+# Speedtest
+alias speedtest=speedtest-cli
+
+# PHP Artisan
+alias phart="php artisan "
