@@ -1,0 +1,15 @@
+[user]
+	email = srimola91@yahoo.com
+	name = Stefan Rimola
+[core]
+	excludesfile = /Users/srimola13/.gitignore_global
+	editor = /usr/local/bin/vim
+	autocrlf = input
+[push]
+	default = matching
+[merge]
+	ff = false
+[color]
+	ui = auto
+[help]
+	autocorrect = 35
