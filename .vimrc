@@ -31,7 +31,7 @@ set foldenable " enable folding
 set foldmethod=indent " fold based on indent level
 set foldlevelstart=10 " open most folds by default
 set foldnestmax=10 " 10 nested fold max
-set so=100 " scroll offset above and below cursor
+set so=20 " scroll offset above and below cursor
 set numberwidth=6 " set width of line number gutter
 set nocompatible " don't try to be compatible with vi
 set modelines=0 " prevent modelines exploit
@@ -53,16 +53,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" show syntax highlighting groups for word under cursor {
-nmap <C-S-P> :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunction
-" }
-
 " leader mappings {
 
 " Remap <leader> - originally "\"
@@ -74,8 +64,11 @@ nnoremap <silent> <BS><BS> :%s/\s\+$//<cr>:let @/=''<CR>
 " ,w to close buffer safely
 nmap <leader>w :bp<CR>:bdelete #<CR>
 
-" hit ,ev to quickly open and edit vimrc
+" ,ev to open and edit vimrc
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+" ,ec to open and edit colorscheme
+nnoremap <leader>ec <C-w><C-v><C-l>:e ~/.vim/colors/lok1vip.vim<cr>
 
 " map ,n and ,m to buffer previous and buffer next
 map <leader>m :bn<CR>
@@ -199,13 +192,13 @@ augroup END
 " }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Custom UI config settings
+" UI config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI Config {
 syntax enable
 set background=dark
 if !has('gui_running')
-  colorscheme dante
+  colorscheme lok1vip
 else
   colorscheme material-theme
 endif
@@ -222,13 +215,7 @@ call matchadd('ColorColumn', '\%81v', 100)
 
 " }
 
-" Custom Colorscheme {
-hi Folded ctermbg=0
-hi ColorColumn ctermbg=0 ctermfg=1
-hi Comment term=bold ctermfg=6
-hi CursorLineNr ctermfg=1
-" }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" End custom color scheme settings
+" End UI config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
