@@ -19,3 +19,6 @@ alias speedtest=speedtest-cli
 
 # PHP Artisan
 alias phart="php artisan "
+
+# vtop https://github.com/MrRio/vtop
+alias top="vtop"
