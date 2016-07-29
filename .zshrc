@@ -86,7 +86,7 @@ source $ZSH/oh-my-zsh.sh
 . ~/.aliases
 
 # Startup script
-. ~/Code/startup.sh
+. ~/startup.sh
 
 # functions
 . ~/.functions
