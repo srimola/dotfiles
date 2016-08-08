@@ -22,3 +22,9 @@ alias phart="php artisan "
 
 # vtop https://github.com/MrRio/vtop
 alias top="vtop"
+
+# Vagrant
+alias v="vagrant "
+
+# Git aliases
+alias ghist="git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
