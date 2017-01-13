@@ -9,14 +9,13 @@ set incsearch " incremental search
 set numberwidth=4 " set line numbers to 4 spaces
 set autoread " set auto read when a file is changed externally
 set ignorecase " ignore case when searching
-set cindent " C style indentation
+" set cindent " C style indentation
 set lazyredraw " performance config
 set encoding=utf8 " set utf8 as standard encoding
 set nobackup " turn backup off, since most is in VCS
 set nowb " turn backup off
 set noswapfile " turn backup off
 set ai " auto indent
-set si " smart indent
 set wrap " wrap lines
 set linebreak " only wrap at certain characters
 set nolist " list disables linebreak
@@ -39,6 +38,7 @@ set undofile " Undo previous changes when opening a file
 set undodir=~/.vim/undo/
 set hidden " Allow buffer switching without saving changes
 set clipboard=unnamed " allow cut and paste operations to work with system clipboard
+set indentkeys-=0{ " don't move { character to start of line
 " }
 
 " Key mappings {
@@ -47,11 +47,27 @@ noremap ;; ;
 nnoremap j gj
 nnoremap k gk
 
-" map ctrl+{nav} to window navigation
+" map ctrl+t to new split and open ctrlp
+nnoremap <C-t> :vs<cr><C-w>l <bar> :CtrlP<cr>
+
+" map ctrl+{nav} to split navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Damian Conway's Die Blinkënmatchen: highlight matches
+nnoremap <silent> n n:call HLNext(0.2)<cr>
+nnoremap <silent> N N:call HLNext(0.2)<cr>
+
+function! HLNext (blinktime)
+  let target_pat = '\c\%#'.@/
+  let ring = matchadd('ErrorMsg', target_pat, 101)
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  call matchdelete(ring)
+  redraw
+endfunction
 
 " leader mappings {
 
@@ -60,6 +76,9 @@ let mapleader="," " map leader to comma
 
 " map double-delete to remove all whitespace from current file
 nnoremap <silent> <BS><BS> :%s/\s\+$//<cr>:let @/=''<CR>
+
+" map ,<DEL> to convert all tabs to 2 spaces
+nnoremap <leader><bs> :%s/\t/  /g<cr>
 
 " ,w to close buffer safely
 nmap <leader>w :bp<CR>:bdelete #<CR>
@@ -77,6 +96,9 @@ map <leader>n :bp<CR>
 map <Leader>t :NERDTreeToggle<CR>
 " }
 
+" map ,p to autoinsert a prettydump
+map <leader>p :startinsert<cr>{{ prettydump(<esc>a
+
 " kill arrow keys {
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -87,6 +109,9 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 " }
+
+" map w!! to save file if you forget to sudo
+cmap w!! w !sudo tee % >/dev/null
 " }
 
 " Filetype settings {
@@ -107,15 +132,6 @@ let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
 " }
 
-" YouCompleteMe settings {
-let g:loaded_youcompleteme = 1 " don't load YCM on start
-" }
-
-" map ,y and ,Y to turn YouCompleteMe off and on
-nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
-nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
-" }
-
 " Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
@@ -129,8 +145,10 @@ set updatetime=3000 " check for updates every 3 seconds
 " }
 
 " Change indent Char for IndentLine plugin
-let g:indentLine_char = '┆'
+let g:indentLine_char = '┊'
 
+" Circumvent indentLine's aggressive concealing
+let g:indentLine_concealcursor=""
 
 " Use htmljinja syntax highlighting for twig files
 au BufRead,BufNewFile *.twig set filetype=jinja
@@ -180,7 +198,7 @@ let g:ctrlp_abbrev = {
 \ 'expanded': '.*',
 \ 'mode': 'pfrz'
 \ },
-\	]
+\  ]
 \ }
 " }
 
@@ -188,6 +206,21 @@ let g:ctrlp_abbrev = {
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+" }
+
+" Recursively create directory on save if it doesn't exist {
+function! s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 " }
 

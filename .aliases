@@ -28,3 +28,11 @@ alias v="vagrant "
 
 # Git aliases
 alias ghist="git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
+
+# Deploy
+alias deploy="node deploy"
+
+# General
+alias h="\history -E"
+alias zshrc="vim ~/.zshrc"
+alias vimrc="vim ~/.vimrc"

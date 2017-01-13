@@ -5,7 +5,7 @@ export ZSH=/Users/srimola13/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="custom"
+ZSH_THEME="lok1vip"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,12 +49,13 @@ ZSH_THEME="custom"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git brew vi-mode)
 
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
+export PATH=/usr/local/php5/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -90,3 +91,6 @@ source $ZSH/oh-my-zsh.sh
 
 # functions
 . ~/.functions
+
+export NVM_DIR="$HOME/.nvm"
+  . "$NVM_DIR/nvm.sh"
