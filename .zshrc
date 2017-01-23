@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/srimola13/.oh-my-zsh
+export ZSH=/Users/steez/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -55,7 +55,7 @@ plugins=(git)
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$HOME/.npm-packages/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,3 +90,5 @@ source $ZSH/oh-my-zsh.sh
 
 # functions
 . ~/.functions
+
+source $(brew --prefix nvm)/nvm.sh
