@@ -186,7 +186,7 @@ let g:ctrlp_map = '<c-o>' " remap ctrlp to ctrl+o
 let g:ctrlp_dont_split = 'NERD'
 set wildignore+=*/vendor/**
 set wildignore+=*/build/**
-" set wildignore+=*/assets/**
+set wildignore+=*/assets/**
 set wildignore+=*/node_modules/**
 " make ctrlp search regex match and replace space with .*
 let g:ctrlp_regexp = 1

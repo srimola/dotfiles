@@ -4,6 +4,7 @@ alias as="amp sync"
 alias aw="amp watch"
 alias acon="amp connect"
 alias asc="amp sandbox-create"
+alias prodconfig="cp config/config.prod.yml config/config.sandbox.yml"
 
 # Vaprobash
 alias vaprobash="curl -L http://bit.ly/vaprobash > Vagrantfile"
