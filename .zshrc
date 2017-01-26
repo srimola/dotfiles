@@ -56,6 +56,7 @@ plugins=(git)
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.npm-packages/bin:$PATH"
+export PATH="$HOME/.node/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
