@@ -95,5 +95,5 @@ source $ZSH/oh-my-zsh.sh
 . ~/.functions
 
 source $(brew --prefix nvm)/nvm.sh
-export NVM_DIR="$HOME/.nvm"
-  . "$NVM_DIR/nvm.sh"
+# export NVM_DIR="$HOME/.nvm"
+  # . "$NVM_DIR/nvm.sh"
