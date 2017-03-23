@@ -153,6 +153,9 @@ let g:indentLine_concealcursor=""
 " Use htmljinja syntax highlighting for twig files
 au BufRead,BufNewFile *.twig set filetype=jinja
 
+" JS and JSX syntax highlighting
+let g:jsx_ext_required = 0
+
 " NERDTree settings {
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 35
