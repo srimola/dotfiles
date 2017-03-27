@@ -45,7 +45,7 @@ hi MatchParen	cterm=none ctermbg=0 ctermfg=1
 
 " syntax hi colors
 hi Comment	term=bold ctermfg=darkcyan guifg=cyan4
-hi PreProc	term=underline ctermfg=darkblue guifg=dodgerblue4
+hi PreProc	term=underline ctermfg=45 guifg=dodgerblue4
 hi Constant	term=underline ctermfg=darkred guifg=firebrick3
 hi Type		term=underline ctermfg=darkgreen gui=none guifg=chartreuse3
 hi Statement	term=bold ctermfg=darkblue gui=none guifg=gold3
@@ -85,6 +85,7 @@ hi link SpecialChar	Special
 hi link Delimiter	Special
 hi link SpecialComment	Special
 hi link Debug		Special
+hi link vimHiCtermColor PreProc
 
 " vim hi
 hi vimMapMod ctermfg=white
@@ -104,3 +105,7 @@ hi vimBracket ctermfg=white
 
 " custom
 hi def link jsonKeyword Identifier
+hi jsObjectKey ctermfg=51
+hi Comment cterm=italic,bold, gui=italic,bold
+hi Noise ctermfg=225
+hi Function ctermfg=50
