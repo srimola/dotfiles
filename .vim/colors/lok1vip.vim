@@ -51,7 +51,7 @@ hi Type		term=underline ctermfg=darkgreen gui=none guifg=chartreuse3
 hi Statement	term=bold ctermfg=darkblue gui=none guifg=gold3
 hi Identifier	term=underline ctermfg=darkgreen guifg=darkolivegreen4
 hi Ignore	term=bold ctermfg=darkgray guifg=gray45
-hi Special	term=underline ctermfg=darkblue guifg=sienna
+hi Special	term=underline ctermfg=magenta guifg=sienna
 hi Error	term=reverse ctermfg=black ctermbg=red guifg=gray guibg=red3
 hi Todo		term=standout ctermfg=black ctermbg=red gui=bold guifg=gray10 guibg=red
 hi Underlined	term=underline cterm=underline ctermfg=darkblue gui=underline guifg=slateblue
@@ -109,3 +109,5 @@ hi jsObjectKey ctermfg=51
 hi Comment cterm=italic,bold, gui=italic,bold
 hi Noise ctermfg=225
 hi Function ctermfg=50
+hi link jsRegexpString Constant
+hi link jsSpecial Constant
