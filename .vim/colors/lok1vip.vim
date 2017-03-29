@@ -111,3 +111,4 @@ hi Noise ctermfg=225
 hi Function ctermfg=50
 hi link jsRegexpString Constant
 hi link jsSpecial Constant
+hi link xmlEndTag xmlTag
