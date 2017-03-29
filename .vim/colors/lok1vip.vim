@@ -105,10 +105,16 @@ hi vimBracket ctermfg=white
 
 " custom
 hi def link jsonKeyword Identifier
-hi jsObjectKey ctermfg=51
 hi Comment cterm=italic,bold, gui=italic,bold
-hi Noise ctermfg=225
+hi Noise ctermfg=252
 hi Function ctermfg=50
-hi link jsRegexpString Constant
-hi link jsSpecial Constant
-hi link xmlEndTag xmlTag
+
+" js custom
+hi link jsRegexpString	    Constant
+hi link jsSpecial	    Constant
+hi link xmlEndTag	    xmlTag
+hi link jsExportDefault	    jsExport
+hi link jsFuncArgOperator   PreProc
+hi link jsOperator	    PreProc
+hi link jsFuncCall	    Statement
+hi jsObjectKey ctermfg=51
