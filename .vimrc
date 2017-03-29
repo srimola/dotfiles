@@ -1,7 +1,11 @@
-" Pathogen
-execute pathogen#infect()
+" Stefan Rimola
+" 2017
 
-" Vim-centric config {
+" - Pathogen {{{
+execute pathogen#infect()
+" }}}
+
+" - Vim-centric config {{{
 set hlsearch " highlight searches
 set incsearch " incremental search
 " set tabstop=2 " number of space of tab char
@@ -33,15 +37,25 @@ set foldnestmax=10 " 10 nested fold max
 set so=20 " scroll offset above and below cursor
 set numberwidth=6 " set width of line number gutter
 set nocompatible " don't try to be compatible with vi
-set modelines=0 " prevent modelines exploit
+set modelines=1 " prevent modelines exploit
 set undofile " Undo previous changes when opening a file
 set undodir=~/.vim/undo/
 set hidden " Allow buffer switching without saving changes
 set clipboard=unnamed " allow cut and paste operations to work with system clipboard
 set indentkeys-=0{ " don't move { character to start of line
-" }
 
-" Key mappings {
+" Return to last edit position when opening files
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" when searching, look in current file's directory, then current directory,
+" then each directory under current
+set path=.,,**
+
+" Reload when entering buffer or gaining focus
+au FocusGained,BufEnter * :silent! !
+" }}}
+
+" - Key mappings {{{
 map ; :
 noremap ;; ;
 nnoremap j gj
@@ -56,7 +70,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Damian Conway's Die Blinkënmatchen: highlight matches
+" map w!! to save file if you forget to sudo
+cmap w!! w !sudo tee % >/dev/null
+
+" Damian Conway's Die Blinkënmatchen: highlight matches {{{
 nnoremap <silent> n n:call HLNext(0.2)<cr>
 nnoremap <silent> N N:call HLNext(0.2)<cr>
 
@@ -68,8 +85,9 @@ function! HLNext (blinktime)
   call matchdelete(ring)
   redraw
 endfunction
+" }}}
 
-" leader mappings {
+" leader mappings {{{
 
 " Remap <leader> - originally "\"
 let mapleader="," " map leader to comma
@@ -94,12 +112,12 @@ map <leader>m :bn<CR>
 map <leader>n :bp<CR>
 " Remap nerdtree toggle
 map <Leader>t :NERDTreeToggle<CR>
-" }
 
 " map ,p to autoinsert a prettydump
 map <leader>p :startinsert<cr>{{ prettydump(<esc>a
+" }}}
 
-" kill arrow keys {
+" kill arrow keys {{{
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -108,41 +126,17 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-" }
+" }}}
 
-" map w!! to save file if you forget to sudo
-cmap w!! w !sudo tee % >/dev/null
-" }
+" }}}
 
-" Filetype settings {
+" - File settings {{{
 filetype plugin on " enable filetype specific plugins
 filetype indent on " enable filetype specific indentation
-" }
 
-" Airline settings {
-let g:airline_theme='term'
-let g:airline_powerline_fonts = 1 " populate airline_symbols with powerline symbols
-set laststatus=2
-let g:airline#extensions#tabline#enabled = 1 " show list of buffers when there is only one tab
-let g:airline#extensions#tabline#buffer_nr_show = 1 " show buffer number
-" }
+" }}}
 
-" Nerdcommenter settings {
-let g:NERDSpaceDelims = 1
-let g:NERDTrimTrailingWhitespace = 1
-" }
-
-" Return to last edit position when opening files
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" when searching, look in current file's directory, then current directory,
-" then each directory under current
-set path=.,,**
-
-" GitGutter settings {
-let g:gitgutter_enable = 1 " enable gitgutter by default
-set updatetime=3000 " check for updates every 3 seconds
-" }
+" - Plugin settings{{{
 
 " Change indent Char for IndentLine plugin
 let g:indentLine_char = '┊'
@@ -152,39 +146,50 @@ let g:indentLine_concealcursor=""
 
 " Use htmljinja syntax highlighting for twig files
 au BufRead,BufNewFile *.twig set filetype=jinja
+" - Airline settings {{{
+let g:airline_theme='term'
+let g:airline_powerline_fonts = 1 " populate airline_symbols with powerline symbols
+set laststatus=2
+let g:airline#extensions#tabline#enabled = 1 " show list of buffers when there is only one tab
+let g:airline#extensions#tabline#buffer_nr_show = 1 " show buffer number
+" }}}
 
-" JS and JSX syntax highlighting
-let g:jsx_ext_required = 0
+" - Nerdcommenter settings {{{
+let g:NERDSpaceDelims = 1
+let g:NERDTrimTrailingWhitespace = 1
+" }}}
 
-" NERDTree settings {
+" - GitGutter settings {{{
+let g:gitgutter_enable = 1 " enable gitgutter by default
+set updatetime=3000 " check for updates every 3 seconds
+" }}}
+
+" - NERDTree settings {{{
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 35
 let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeIgnore = ['node_modules[[dir]]', 'build[[dir]]', 'assets[[dir]]', 'static[[dir]]', 'vendor[[dir]]', '.git[[dir]]', '.vagrant[[dir]]', '.idea[[dir]]', '\.DS_Store$', '\.amp$']
+let g:NERDTreeIgnore = ['node_modules[[dir]]', 'build[[dir]]', 'assets[[dir]]', 'vendor[[dir]]', '.git[[dir]]', '.vagrant[[dir]]', '.idea[[dir]]', '\.DS_Store$', '\.amp$']
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeFileExtensionHighlightFullName = 1 " NERDTree file extension highlighting
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeCascadeOpenSingleChildDir = 1
-" }
+" }}}
 
-" Reload when entering buffer or gaining focus
-au FocusGained,BufEnter * :silent! !
-
-" vim-closetag settings {
+" - vim-closetag settings {{{
 let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.twig,*.hbs"
-" }
+" }}}
 
-" Syntastic settings {
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-" }
+" - Syntastic settings {{{
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 1
+" }}}
 
-" Ctrlp settings {
+" - Ctrlp settings {{{
 let g:ctrlp_map = '<c-o>' " remap ctrlp to ctrl+o
 let g:ctrlp_dont_split = 'NERD'
 set wildignore+=*/vendor/**
@@ -203,16 +208,17 @@ let g:ctrlp_abbrev = {
 \ },
 \  ]
 \ }
-" }
+" }}}
+" }}}
 
-" Apply vim config changes without restart {
+" - Apply vim config changes without restart {{{
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
-" }
+" }}}
 
-" Recursively create directory on save if it doesn't exist {
+" - Recursively create directory on save if it doesn't exist {{{
 function! s:MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
@@ -225,12 +231,9 @@ augroup BWCCreateDir
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
-" }
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UI config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UI Config {
+" - UI Config {{{
 syntax enable
 set background=dark
 if !has('gui_running')
@@ -249,9 +252,6 @@ set guifont=DroidSansMonoForPowerline\ Nerd\ Font
 " show ColorColumn when text is bleeding over
 call matchadd('ColorColumn', '\%81v', 100)
 
-" }
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" End UI config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+" vim:foldmethod=marker:foldlevel=0
