@@ -7,7 +7,29 @@ execute pathogen#infect()
 
 " - Vim-centric config {{{
 
+set nocompatible " don't try to be compatible
+
+set ignorecase " ignore case when searching
+set lazyredraw " performance config
+set encoding=utf8 " set utf8 as standard encoding
+set wrap " wrap lines
+set linebreak " only wrap at certain characters
+set nolist " list disables linebreak
+set textwidth=0 " prevent Vim automatically inserting line breaks
+set wrapmargin=0 " prevent Vim automatically inserting line breaks
+set formatoptions=qrn1 " wrap long lines
+set wildmenu " show autocomplete menus
+set numberwidth=6 " set width of line number gutter
+set undofile " Undo previous changes when opening a file
+set undodir=~/.vim/undo/
+set hidden " Allow buffer switching without saving changes
+set clipboard=unnamed " allow cut and paste operations to work with system clipboard
+set indentkeys-=0{ " don't move { character to start of line
+set modelines=1 " allow folding in vimrc
+set backspace=indent,eol,start " allow backspace everywhere
+
 " - File settings {{{
+
 set autoread " auto read when a file is changed externally
 set nobackup " turn backup off, since most is in VCS
 set nowb " turn backup off
@@ -94,27 +116,6 @@ augroup BWCCreateDir
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 " }}}
-
-set ignorecase " ignore case when searching
-set lazyredraw " performance config
-set encoding=utf8 " set utf8 as standard encoding
-set wrap " wrap lines
-set linebreak " only wrap at certain characters
-set nolist " list disables linebreak
-set textwidth=0 " prevent Vim automatically inserting line breaks
-set wrapmargin=0 " prevent Vim automatically inserting line breaks
-set fo=qn1 " wrap long lines
-
-set wildmenu " show autocomplete menus
-set numberwidth=6 " set width of line number gutter
-set nocompatible " don't try to be compatible with vi
-set undofile " Undo previous changes when opening a file
-set undodir=~/.vim/undo/
-set hidden " Allow buffer switching without saving changes
-set clipboard=unnamed " allow cut and paste operations to work with system clipboard
-set indentkeys-=0{ " don't move { character to start of line
-set modelines=1 " allow folding in vimrc
-
 " }}}
 
 " - Key mappings {{{
