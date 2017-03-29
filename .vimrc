@@ -6,53 +6,115 @@ execute pathogen#infect()
 " }}}
 
 " - Vim-centric config {{{
-set hlsearch " highlight searches
-set incsearch " incremental search
-" set tabstop=2 " number of space of tab char
-" set shiftwidth=2 " number of spaces to (auto)indent
-set numberwidth=4 " set line numbers to 4 spaces
-set autoread " set auto read when a file is changed externally
-set ignorecase " ignore case when searching
-" set cindent " C style indentation
-set lazyredraw " performance config
-set encoding=utf8 " set utf8 as standard encoding
+
+" - File settings {{{
+set autoread " auto read when a file is changed externally
 set nobackup " turn backup off, since most is in VCS
 set nowb " turn backup off
 set noswapfile " turn backup off
+
+" Return to last edit position when opening files
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" when searching, look in current file's directory, then current directory, then each directory under current
+set path=.,,**
+
+" Reload when entering buffer or gaining focus
+au FocusGained,BufEnter * :silent! !
+
+filetype plugin on " enable filetype specific plugins
+filetype indent on " enable filetype specific indentation
+" }}}
+
+" - Search settings {{{
+set hlsearch " highlight searches
+set incsearch " incremental search
+" }}}
+
+" - Fold settings {{{
+set foldenable " enable folding
+set foldmethod=indent " fold based on indent level
+set foldlevelstart=10 " open most folds by default
+set foldnestmax=10 " 10 nested fold max
+" }}}
+
+" - Indent + tab settings {{{
+" set cindent " C style indentation
+" set tabstop=2 " number of space of tab char
+" set shiftwidth=2 " number of spaces to (auto)indent
+
 set ai " auto indent
+set expandtab " use spaces instead of tabs
+set smarttab "enable smart-tabs
+set softtabstop=2 " number of spaces per tab (again)
+" }}}
+
+" - UI Config {{{
+syntax enable
+set background=dark
+if !has('gui_running')
+  colorscheme lok1vip
+else
+  colorscheme material-theme
+endif
+set number " show line numbers
+set relativenumber " show relative line numbers
+set numberwidth=4 " set line numbers to 4 spaces
+set ruler " show cursor position
+set cursorline " show location of cursor with horizontal line
+set so=20 " scroll offset above and below cursor
+
+" set guifont for nerd icons
+set guifont=DroidSansMonoForPowerline\ Nerd\ Font
+
+" show ColorColumn when text is bleeding over
+call matchadd('ColorColumn', '\%81v', 100)
+
+" }}}
+
+" - Apply vim config changes without restart {{{
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
+" }}}
+
+" - Recursively create directory on save if it doesn't exist {{{
+function! s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+" }}}
+
+set ignorecase " ignore case when searching
+set lazyredraw " performance config
+set encoding=utf8 " set utf8 as standard encoding
 set wrap " wrap lines
 set linebreak " only wrap at certain characters
 set nolist " list disables linebreak
 set textwidth=0 " prevent Vim automatically inserting line breaks
 set wrapmargin=0 " prevent Vim automatically inserting line breaks
-set fo=qrn1 " wrap long lines
-set expandtab " use spaces instead of tabs
-set smarttab "enable smart-tabs
-set softtabstop=2 " number of spaces per tab (again)
+set fo=qn1 " wrap long lines
+
 set wildmenu " show autocomplete menus
-set foldenable " enable folding
-set foldmethod=indent " fold based on indent level
-set foldlevelstart=10 " open most folds by default
-set foldnestmax=10 " 10 nested fold max
-set so=20 " scroll offset above and below cursor
 set numberwidth=6 " set width of line number gutter
 set nocompatible " don't try to be compatible with vi
-set modelines=1 " prevent modelines exploit
 set undofile " Undo previous changes when opening a file
 set undodir=~/.vim/undo/
 set hidden " Allow buffer switching without saving changes
 set clipboard=unnamed " allow cut and paste operations to work with system clipboard
 set indentkeys-=0{ " don't move { character to start of line
+set modelines=1 " allow folding in vimrc
 
-" Return to last edit position when opening files
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" when searching, look in current file's directory, then current directory,
-" then each directory under current
-set path=.,,**
-
-" Reload when entering buffer or gaining focus
-au FocusGained,BufEnter * :silent! !
 " }}}
 
 " - Key mappings {{{
@@ -130,13 +192,10 @@ inoremap <right> <nop>
 
 " }}}
 
-" - File settings {{{
-filetype plugin on " enable filetype specific plugins
-filetype indent on " enable filetype specific indentation
-
-" }}}
-
 " - Plugin settings{{{
+
+" vim-autoclose don't expand spaces
+let g:AutoCloseExpandSpace = 0
 
 " Change indent Char for IndentLine plugin
 let g:indentLine_char = '┊'
@@ -146,6 +205,7 @@ let g:indentLine_concealcursor=""
 
 " Use htmljinja syntax highlighting for twig files
 au BufRead,BufNewFile *.twig set filetype=jinja
+
 " - Airline settings {{{
 let g:airline_theme='term'
 let g:airline_powerline_fonts = 1 " populate airline_symbols with powerline symbols
@@ -176,7 +236,7 @@ let g:NERDTreeCascadeOpenSingleChildDir = 1
 " }}}
 
 " - vim-closetag settings {{{
-let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.twig,*.hbs"
+let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.twig,*.hbs,*.js,*.jsx"
 " }}}
 
 " - Syntastic settings {{{
@@ -190,6 +250,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.twig,*.hbs"
 " }}}
 
 " - Ctrlp settings {{{
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_map = '<c-o>' " remap ctrlp to ctrl+o
 let g:ctrlp_dont_split = 'NERD'
 set wildignore+=*/vendor/**
@@ -209,49 +270,6 @@ let g:ctrlp_abbrev = {
 \  ]
 \ }
 " }}}
-" }}}
-
-" - Apply vim config changes without restart {{{
-augroup myvimrc
-    au!
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
-" }}}
-
-" - Recursively create directory on save if it doesn't exist {{{
-function! s:MkNonExDir(file, buf)
-    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-        let dir=fnamemodify(a:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
-        endif
-    endif
-endfunction
-augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
-augroup END
-" }}}
-
-" - UI Config {{{
-syntax enable
-set background=dark
-if !has('gui_running')
-  colorscheme lok1vip
-else
-  colorscheme material-theme
-endif
-set number " show line numbers
-set relativenumber " show relative line numbers
-set ruler " show cursor position
-set cursorline " show location of cursor with horizontal line
-
-" set guifont for nerd icons
-set guifont=DroidSansMonoForPowerline\ Nerd\ Font
-
-" show ColorColumn when text is bleeding over
-call matchadd('ColorColumn', '\%81v', 100)
-
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
