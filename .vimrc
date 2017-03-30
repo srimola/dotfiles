@@ -37,7 +37,7 @@ set foldnestmax=10 " 10 nested fold max
 set so=20 " scroll offset above and below cursor
 set numberwidth=6 " set width of line number gutter
 set nocompatible " don't try to be compatible with vi
-set modelines=1 " prevent modelines exploit
+set modelines=1 " allow folding in vimrc using modeline magic
 set undofile " Undo previous changes when opening a file
 set undodir=~/.vim/undo/
 set hidden " Allow buffer switching without saving changes
