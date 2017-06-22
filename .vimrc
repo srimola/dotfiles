@@ -10,6 +10,7 @@ set hlsearch " highlight searches
 set incsearch " incremental search
 " set tabstop=2 " number of space of tab char
 " set shiftwidth=2 " number of spaces to (auto)indent
+set backspace=2 " more powerful backspacing
 set numberwidth=4 " set line numbers to 4 spaces
 set autoread " set auto read when a file is changed externally
 set ignorecase " ignore case when searching
@@ -192,6 +193,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.twig,*.hbs"
 " - Ctrlp settings {{{
 let g:ctrlp_map = '<c-o>' " remap ctrlp to ctrl+o
 let g:ctrlp_dont_split = 'NERD'
+let g:ctrlp_working_path_mode = 0 " only search current directory
 set wildignore+=*/vendor/**
 set wildignore+=*/build/**
 set wildignore+=*/assets/**
