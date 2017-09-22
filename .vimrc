@@ -84,7 +84,7 @@ set relativenumber " show relative line numbers
 set numberwidth=4 " set line numbers to 4 spaces
 set ruler " show cursor position
 set cursorline " show location of cursor with horizontal line
-set so=20 " scroll offset above and below cursor
+" set so=20 " scroll offset above and below cursor
 
 " set guifont for nerd icons
 set guifont=DroidSansMonoForPowerline\ Nerd\ Font
