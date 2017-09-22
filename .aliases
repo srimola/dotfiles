@@ -37,3 +37,6 @@ alias deploy="node deploy"
 alias h="\history -E"
 alias zshrc="vim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
+
+# Lighthouse
+alias lh="lighthouse --view --chrome-flags=\"--headless\" "
