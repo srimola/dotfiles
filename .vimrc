@@ -212,7 +212,8 @@ let g:airline_theme='term'
 let g:airline_powerline_fonts = 1 " populate airline_symbols with powerline symbols
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1 " show list of buffers when there is only one tab
-let g:airline#extensions#tabline#buffer_nr_show = 1 " show buffer number
+let g:airline#extensions#tabline#buffer_nr_show = 0 " dont show buffer number
+let g:airline_highlighting_cache = 1 " cache syntax highlighting groups
 " }}}
 
 " - Nerdcommenter settings {{{
