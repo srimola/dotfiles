@@ -40,3 +40,6 @@ alias vimrc="vim ~/.vimrc"
 
 # Lighthouse
 alias lh="lighthouse --view --chrome-flags=\"--headless\" "
+
+# NVM
+alias loadnvm=". /usr/local/opt/nvm/nvm.sh"
