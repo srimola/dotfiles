@@ -91,6 +91,3 @@ source $ZSH/oh-my-zsh.sh
 
 # functions
 . ~/.functions
-
-export NVM_DIR="$HOME/.nvm"
-  . "$NVM_DIR/nvm.sh"
