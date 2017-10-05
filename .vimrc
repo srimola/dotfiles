@@ -9,6 +9,7 @@ execute pathogen#infect()
 
 set nocompatible " don't try to be compatible
 
+set title " show filename in window titlebar
 set ignorecase " ignore case when searching
 set lazyredraw " performance config
 set encoding=utf8 " set utf8 as standard encoding
@@ -80,17 +81,22 @@ else
   colorscheme material-theme
 endif
 set number " show line numbers
-set relativenumber " show relative line numbers
+" set relativenumber " show relative line numbers
 set numberwidth=4 " set line numbers to 4 spaces
-set ruler " show cursor position
-set cursorline " show location of cursor with horizontal line
-" set so=20 " scroll offset above and below cursor
+" set ruler " show cursor position in airline
+" set cursorline " show location of cursor with horizontal line
+set scrolloff=2 " scroll when 2 lines from top/bottom
 
 " set guifont for nerd icons
 set guifont=DroidSansMonoForPowerline\ Nerd\ Font
 
 " show ColorColumn when text is bleeding over
 call matchadd('ColorColumn', '\%81v', 100)
+
+let loaded_matchparen = 1 " disable paren matching
+
+set ttyfast " send more characters to screen for redraw
+" set synmaxcol=200 " only syntax match first 80 characters. helps perf with long lines
 
 " }}}
 

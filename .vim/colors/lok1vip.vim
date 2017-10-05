@@ -35,7 +35,7 @@ hi DiffText	term=reverse cterm=bold ctermbg=red gui=bold guibg=red3
 hi Cursor	guifg=bg guibg=fg
 hi lCursor	guifg=bg guibg=fg
 " hi CursorLine	ctermbg=black
-hi CursorLineNr ctermfg=1
+" hi CursorLineNr ctermfg=1
 hi StatusLine	term=reverse cterm=reverse gui=reverse guifg=gray60
 hi StatusLineNC	term=reverse cterm=reverse gui=reverse guifg=gray40
 hi VertSplit	term=reverse cterm=reverse ctermfg=darkgrey ctermbg=cyan gui=bold,reverse guifg=red
