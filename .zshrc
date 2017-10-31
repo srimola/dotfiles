@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/srimola13/.oh-my-zsh
 
@@ -56,7 +57,6 @@ plugins=(git brew vi-mode)
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,3 +91,7 @@ source $ZSH/oh-my-zsh.sh
 
 # functions
 . ~/.functions
+
+# export NVM_DIR="$HOME/.nvm"
+  # . "$NVM_DIR/nvm.sh"
+zprof
