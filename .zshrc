@@ -97,3 +97,7 @@ source $ZSH/oh-my-zsh.sh
 source $(brew --prefix nvm)/nvm.sh
 # export NVM_DIR="$HOME/.nvm"
   # . "$NVM_DIR/nvm.sh"
+
+if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
+  . ~/.config/exercism/exercism_completion.zsh
+fi
