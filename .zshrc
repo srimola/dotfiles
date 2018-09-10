@@ -1,6 +1,6 @@
 zmodload zsh/zprof
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/srimola13/.oh-my-zsh
+export ZSH=/Users/srimola/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -57,6 +57,11 @@ plugins=(git vi-mode zsh-syntax-highlighting)
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
+export AWS_DEFAULT_REGION=us-east-1
+export AWS_PROFILE=federate
+export AWS_EB_PROFILE=federate
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,3 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # export NVM_DIR="$HOME/.nvm"
   # . "$NVM_DIR/nvm.sh"
 zprof
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
