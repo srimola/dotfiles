@@ -1,15 +1,16 @@
 [user]
-	email = stefanrimola@gmail.com
-	name = Stefan Rimola
+  email = stefanrimola@gmail.com
+  name = Stefan Rimola
 [core]
-	excludesfile = /Users/srimola13/.gitignore_global
-	editor = /usr/local/bin/vim
-	autocrlf = input
+  excludesfile = /Users/srimola13/.gitignore_global
+  editor = vim
+  autocrlf = input
+  pager = less
 [push]
-	default = matching
+  default = matching
 [merge]
-	ff = true 
+  ff = true
 [color]
-	ui = auto
+  ui = auto
 [help]
-	autocorrect = 35
+  autocorrect = 35
