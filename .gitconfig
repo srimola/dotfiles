@@ -14,3 +14,5 @@
   ui = auto
 [help]
   autocorrect = 35
+[pager]
+  branch = false
