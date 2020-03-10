@@ -1,4 +1,4 @@
-# Stefan Rimola's dotfiles
+my dotfiles
 `$ cd ~`  
 `$ git clone https://github.com/srimola/dotfiles.git dotfiles`  
 `$ mv dotfiles/* dotfiles/.* .`  
